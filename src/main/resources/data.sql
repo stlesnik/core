@@ -1,13 +1,28 @@
-DROP TABLE IF EXISTS atm_table;
+DROP TABLE IF EXISTS COUNTERS;
+DROP TABLE IF EXISTS CASSETTES;
 
-	CREATE TABLE atm_table (
-	  id INT AUTO_INCREMENT  PRIMARY KEY,
-	  name VARCHAR(255) NOT NULL,
-	  description VARCHAR(255) NOT NULL,
-	  code INT
+	CREATE TABLE CASSETTES (
+	  ID INT,
+	  NAME VARCHAR(255) NOT NULL,
+	  DESCRIPTION VARCHAR(255),
+	  TYPE ENUM('Recycling','In','RetractReject'),
+	  PRIMARY KEY (ID)
 	);
 
-	INSERT INTO atm_table (name, description, code) VALUES
-	  ('Underground atm', 'Located on mayakovskaya metro station', '20031'),
-	  ('Bank office atm', 'Lokated on Tverskaya street, h. 31', '42203'),
-	  ('Shop atm', 'Located in the Crocus moll on the second floor', '24502');
+	CREATE TABLE COUNTERS (
+	  ID INT AUTO_INCREMENT,
+	  NAME VARCHAR(255) NOT NULL,
+	  VALUEe INT,
+	  CASSETTE_ID INT,
+	  PRIMARY KEY (ID),
+      CONSTRAINT cassette_id FOREIGN KEY (CASSETTE_ID) REFERENCES CASSETTES(ID)
+	);
+
+INSERT INTO CASSETTES (ID, NAME, DESCRIPTION, TYPE) VALUES
+	  (4301, 'Main cassette', 'cassette, designed for tests', 'In');
+
+INSERT INTO COUNTERS (NAME, VALUEe, CASSETTE_ID) VALUES
+   	  ('4301 counter for 5000', 5000, 4301),
+   	  ('4301 counter for 1000', 1000, 4301),
+      ('4301 counter for 500', 500, 4301),
+      ('4301 counter for 100', 100, 4301);
