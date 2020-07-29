@@ -20,12 +20,11 @@ public class Counter {
     @JoinColumn(name = "CASSETTE_ID")
     private Cassette cassette_id;
 
-    public int getId() {
-        return id;
+    public Counter(){
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public String getName() {

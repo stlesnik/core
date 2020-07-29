@@ -27,6 +27,8 @@ public class Cassette {
     @OneToMany(mappedBy = "cassette_id", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Counter> counters;
 
+    public Cassette(){
+    }
     public int getId() {
         return id;
     }
