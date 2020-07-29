@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "CASSETTES")
@@ -20,8 +21,11 @@ public class Cassette {
     private CassetteType type;
 
     public enum CassetteType {
-        Recycling, In, RetractReject;
+        Recycling, In, RetractReject
     }
+
+    @OneToMany(mappedBy = "cassette_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Counter> counters;
 
     public int getId() {
         return id;

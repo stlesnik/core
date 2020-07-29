@@ -16,7 +16,7 @@ public class Counter {
     @Column(name = "VALUEe")
     private String value;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CASSETTE_ID")
     private Cassette cassette_id;
 
