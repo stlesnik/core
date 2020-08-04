@@ -1,7 +1,7 @@
-package service;
+package com.stlesnik.core.service;
 
-import model.Cassette;
-import model.Counter;
+import com.stlesnik.core.model.Cassette;
+import com.stlesnik.core.model.Counter;
 
 import java.util.List;
 

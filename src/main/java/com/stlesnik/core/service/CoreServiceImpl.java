@@ -1,8 +1,8 @@
-package service;
+package com.stlesnik.core.service;
 
-import dao.CoreDao;
-import model.Cassette;
-import model.Counter;
+import com.stlesnik.core.dao.CoreDao;
+import com.stlesnik.core.model.Cassette;
+import com.stlesnik.core.model.Counter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

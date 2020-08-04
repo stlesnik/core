@@ -1,4 +1,4 @@
-package model;
+package com.stlesnik.core.model;
 
 import javax.persistence.*;
 

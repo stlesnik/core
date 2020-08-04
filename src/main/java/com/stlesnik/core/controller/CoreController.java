@@ -1,6 +1,7 @@
-package controller;
+package com.stlesnik.core.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,12 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import service.CoreService;
-import model.Cassette;
+import com.stlesnik.core.service.CoreService;
+import com.stlesnik.core.model.Cassette;
 
 import java.util.List;
 
 @RestController
+
 @RequestMapping("/atm")
 public class CoreController {
     @Autowired

@@ -1,7 +1,7 @@
-package dao;
+package com.stlesnik.core.dao;
 
-import model.Cassette;
-import model.Counter;
+import com.stlesnik.core.model.Cassette;
+import com.stlesnik.core.model.Counter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
