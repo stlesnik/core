@@ -13,10 +13,10 @@ public class CoreServiceImpl implements CoreService{
     private CoreDao coreDao;
 
 
-    private CoreServiceImpl(){
+    public CoreServiceImpl(){
     }
 
-    private CoreServiceImpl(CoreDao coreDao) {
+    public CoreServiceImpl(CoreDao coreDao) {
         this.coreDao = coreDao;
     }
 

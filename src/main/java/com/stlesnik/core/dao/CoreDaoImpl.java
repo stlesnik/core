@@ -4,20 +4,18 @@ import com.stlesnik.core.model.Cassette;
 import com.stlesnik.core.model.Counter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public class CoreDaoImpl implements CoreDao{
-    @Autowired
+
     private SessionFactory sessionFactory;
 
-    private CoreDaoImpl(){
+    public CoreDaoImpl(){
     }
-
-    private CoreDaoImpl(SessionFactory sessionFactory) {
+    public CoreDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
