@@ -1,8 +1,12 @@
 package com.stlesnik.core.service;
 
+import com.stlesnik.core.controller.CoreController;
 import com.stlesnik.core.dao.CoreDao;
 import com.stlesnik.core.model.Cassette;
 import com.stlesnik.core.model.Counter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,8 +14,10 @@ import java.util.List;
 
 @Service
 public class CoreServiceImpl implements CoreService{
-    private CoreDao coreDao;
+    Logger logger = LoggerFactory.getLogger(CoreServiceImpl.class);
 
+    @Autowired
+    private CoreDao coreDao;
 
     public CoreServiceImpl(){
     }
