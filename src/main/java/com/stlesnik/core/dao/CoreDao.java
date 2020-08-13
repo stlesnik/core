@@ -9,7 +9,7 @@ import java.util.List;
 public interface CoreDao {
     public void addCassette(Cassette cassette);
 
-    public void updateCassette(Cassette cassette);
+    public String updateCassette(Cassette cassette);
 
     public void removeCassette(int id);
 

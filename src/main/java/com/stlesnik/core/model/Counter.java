@@ -14,7 +14,7 @@ public class Counter {
     private String name;
 
     @Column(name = "VALUEe")
-    private String value;
+    private int value;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CASSETTE_ID")
@@ -35,11 +35,11 @@ public class Counter {
         this.name = name;
     }
 
-    public String getValue() {
+    public int getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(int value) {
         this.value = value;
     }
 

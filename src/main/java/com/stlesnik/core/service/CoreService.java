@@ -8,7 +8,7 @@ import java.util.List;
 public interface CoreService {
     public void addCassette(Cassette cassette);
 
-    public void updateCassette(Cassette cassette);
+    public String updateCassette(Cassette cassette);
 
     public void removeCassette(int id);
 

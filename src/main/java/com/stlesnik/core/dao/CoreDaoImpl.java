@@ -3,68 +3,83 @@ package com.stlesnik.core.dao;
 import com.stlesnik.core.model.Cassette;
 import com.stlesnik.core.model.Counter;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 public class CoreDaoImpl implements CoreDao {
 
-    private SessionFactory sessionFactory;
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @PersistenceContext
+    private EntityManager entityManager;
 
     Logger logger = LoggerFactory.getLogger(CoreDaoImpl.class);
 
 
     @Override
     public void addCassette(Cassette cassette) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.persist(cassette);
+        this.entityManager.merge(cassette);
+
+        int cassetteId = cassette.getId();
+        int[] values = {50, 100, 500, 1000, 5000};
+        for (int item : values) {
+            Counter counter = new Counter();
+            counter.setC_id(cassette);
+            counter.setName(item + " counter for cassette " + cassetteId);
+            counter.setValue(item);
+
+            this.entityManager.merge(counter);
+        }
+
+        logger.info("cassette successfully saved. Cassette details: " + cassette);
     }
 
     @Override
-    public void updateCassette(Cassette cassette) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.update(cassette);
+    public String updateCassette(Cassette cassette) {
+
+        List<Cassette> cassetteList = entityManager.createQuery(
+                "SELECT a FROM Cassette a" + " WHERE a.id = " + cassette.getId(), Cassette.class).getResultList();
+        if (cassetteList == null || cassetteList.isEmpty()) {
+            return "there is nothing to update update";
+        }
+        else {
+            Cassette oldCassette = cassetteList.get(0);
+            oldCassette.setName(cassette.getName());
+            oldCassette.setDescription(cassette.getDescription());
+            oldCassette.setType(cassette.getType());
+            entityManager.merge(oldCassette);
+            return "updated";
+        }
     }
 
     @Override
     public void removeCassette(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Cassette cassette = session.load(Cassette.class, id);
+        Cassette cassette = entityManager.find(Cassette.class, id);
         if (cassette != null) {
-            session.delete(cassette);
+            entityManager.remove(cassette);
         }
     }
 
     @Override
     public Cassette getCassetteById(int id) {
-        logger.info("hello from daoImpl");
-        Session session = this.sessionFactory.getCurrentSession();
-        logger.info("get session");
-        Cassette cassette = session.load(Cassette.class, id);
+        Cassette cassette = entityManager.find(Cassette.class, id);
         return cassette;
     }
 
     @Override
     public Counter getCounterById(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Counter counter = session.load(Counter.class, id);
+        Counter counter = entityManager.find(Counter.class, id);
         return counter;
     }
 
     @Override
     public List<Cassette> listCassette() {
-        Session session = this.sessionFactory.getCurrentSession();
-        logger.info("session opened");
-        System.out.println(session);
-        List<Cassette>  cassetteList = session.createQuery("from cassettes").list();
+        List<Cassette> cassetteList = entityManager.createQuery(
+                "SELECT a FROM Cassette a", Cassette.class).getResultList();
         return cassetteList;
     }
 }

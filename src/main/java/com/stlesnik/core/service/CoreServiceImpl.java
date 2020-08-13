@@ -1,6 +1,5 @@
 package com.stlesnik.core.service;
 
-import com.stlesnik.core.controller.CoreController;
 import com.stlesnik.core.dao.CoreDao;
 import com.stlesnik.core.model.Cassette;
 import com.stlesnik.core.model.Counter;
@@ -35,8 +34,8 @@ public class CoreServiceImpl implements CoreService{
 
     @Override
     @Transactional
-    public void updateCassette(Cassette cassette) {
-        coreDao.updateCassette(cassette);
+    public String updateCassette(Cassette cassette) {
+        return coreDao.updateCassette(cassette);
     }
 
     @Override
