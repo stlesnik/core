@@ -10,11 +10,11 @@ public class Counter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "NAME")
-    private String name;
-
     @Column(name = "VALUEe")
     private int value;
+
+    @Column(name ="NUMBER")
+    private int number;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CASSETTE_ID")
@@ -27,20 +27,20 @@ public class Counter {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getValue() {
         return value;
     }
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public Cassette getC_id() {

@@ -14,7 +14,9 @@ public interface CoreService {
 
     public Cassette getCassetteById(int id);
 
-    public Counter getCounterById(int id);
-
     public List<Cassette> listCassette();
+
+    public int getNumOfNotes(int value);
+
+    public void withdrawCounters(int[][] notes);
 }

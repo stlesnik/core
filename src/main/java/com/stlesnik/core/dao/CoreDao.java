@@ -2,7 +2,6 @@ package com.stlesnik.core.dao;
 
 
 import com.stlesnik.core.model.Cassette;
-import com.stlesnik.core.model.Counter;
 
 import java.util.List;
 
@@ -15,7 +14,11 @@ public interface CoreDao {
 
     public Cassette getCassetteById(int id);
 
-    public Counter getCounterById(int id);
-
     public List<Cassette> listCassette();
+
+    public void changeAmountOnCounter(int cassette_id, int number);
+
+    public int getNumOfNotes(int value);
+
+    public void withdrawCounters(int[][] notes);
 }

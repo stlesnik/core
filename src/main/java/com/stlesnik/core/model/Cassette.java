@@ -13,12 +13,12 @@ public class Cassette {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "DESCRIPTION")
-    private String description;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "TYPE")
     private CassetteType type;
+
+    @Column(name = "VALUEe")
+    private Integer value;
 
     public enum CassetteType {
         Recycling, In, RetractReject
@@ -45,20 +45,20 @@ public class Cassette {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public CassetteType getType() {
         return type;
     }
 
     public void setType(CassetteType type) {
         this.type = type;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }
 

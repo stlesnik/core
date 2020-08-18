@@ -52,13 +52,20 @@ public class CoreServiceImpl implements CoreService{
 
     @Override
     @Transactional
-    public Counter getCounterById(int id) {
-        return coreDao.getCounterById(id);
+    public List<Cassette> listCassette() {
+        return coreDao.listCassette();
     }
 
     @Override
     @Transactional
-    public List<Cassette> listCassette() {
-        return coreDao.listCassette();
+    public int getNumOfNotes(int value) {
+        return coreDao.getNumOfNotes(value);
     }
+
+    @Override
+    @Transactional
+    public void withdrawCounters(int[][] notes) {
+        coreDao.withdrawCounters(notes);
+    }
+
 }

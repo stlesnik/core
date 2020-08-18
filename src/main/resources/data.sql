@@ -4,22 +4,32 @@ DROP TABLE IF EXISTS CASSETTES;
 CREATE TABLE CASSETTES (
   ID INT,
   NAME VARCHAR(255) NOT NULL,
-  DESCRIPTION VARCHAR(255),
   TYPE ENUM('Recycling','In','RetractReject'),
+  VALUEe INT,
   PRIMARY KEY (ID)
 );
 CREATE TABLE COUNTERS (
   ID INT AUTO_INCREMENT,
-  NAME VARCHAR(255) NOT NULL,
-  VALUEe INT,
-  CASSETTE_ID INT,
+  VALUEe INT NOT NULL,
+  NUMBER INT NOT NULL,
+  CASSETTE_ID INT NOT NULL,
   PRIMARY KEY (ID),
   CONSTRAINT cassette_id FOREIGN KEY (CASSETTE_ID) REFERENCES CASSETTES(ID)
 );
-INSERT INTO CASSETTES (ID, NAME, DESCRIPTION, TYPE) VALUES
-  (4301, 'Main cassette', 'cassette, designed for tests', 'In');
-INSERT INTO COUNTERS (NAME, VALUEe, CASSETTE_ID) VALUES
-   ('4301 counter for 5000', 5000, 4301),
-   ('4301 counter for 1000', 1000, 4301),
-   ('4301 counter for 500', 500, 4301),
-   ('4301 counter for 100', 100, 4301);
+INSERT INTO CASSETTES (ID, NAME, TYPE) VALUES
+  (4301, 'In cassette', 'In');
+INSERT INTO CASSETTES (ID, NAME, TYPE, VALUEe) VALUES
+  (4560, 'Recycling cassette', 'Recycling', 5000),
+  (4561, 'Recycling cassette', 'Recycling', 2000),
+  (4562, 'Recycling cassette', 'Recycling', 1000),
+  (4563, 'Recycling cassette', 'Recycling', 500),
+  (4564, 'Recycling cassette', 'Recycling', 200),
+  (4565, 'Recycling cassette', 'Recycling', 100);
+INSERT INTO COUNTERS (VALUEe, NUMBER, CASSETTE_ID) VALUES
+   (5000, 5, 4301),
+   (5000, 100, 4560),
+   (2000, 100, 4561),
+   (1000, 100, 4562),
+   (500, 100, 4563),
+   (200, 100, 4564),
+   (100, 100, 4565);
