@@ -2,7 +2,6 @@ package com.stlesnik.core.service;
 
 import com.stlesnik.core.dao.CoreDao;
 import com.stlesnik.core.model.Cassette;
-import com.stlesnik.core.model.Counter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +11,16 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class CoreServiceImpl implements CoreService{
-    Logger logger = LoggerFactory.getLogger(CoreServiceImpl.class);
+public class CassetteServiceImpl implements CassetteService{
+    Logger logger = LoggerFactory.getLogger(CassetteServiceImpl.class);
 
     @Autowired
     private CoreDao coreDao;
 
-    public CoreServiceImpl(){
+    public CassetteServiceImpl(){
     }
 
-    public CoreServiceImpl(CoreDao coreDao) {
+    public CassetteServiceImpl(CoreDao coreDao) {
         this.coreDao = coreDao;
     }
 
@@ -54,18 +53,6 @@ public class CoreServiceImpl implements CoreService{
     @Transactional
     public List<Cassette> listCassette() {
         return coreDao.listCassette();
-    }
-
-    @Override
-    @Transactional
-    public int getNumOfNotes(int value) {
-        return coreDao.getNumOfNotes(value);
-    }
-
-    @Override
-    @Transactional
-    public void withdrawCounters(int[][] notes) {
-        coreDao.withdrawCounters(notes);
     }
 
 }

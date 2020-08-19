@@ -82,19 +82,12 @@ public class CoreDaoImpl implements CoreDao {
     @Override
     public List<Cassette> listCassette() {
         List<Cassette> cassetteList = entityManager.createQuery(
-                "SELECT a FROM Cassette a", Cassette.class).getResultList();
+                "SELECT c from Cassette c", Cassette.class).getResultList();
         return cassetteList;
     }
 
     @Override
-    public void changeAmountOnCounter(int cassette_id, int number) {
-        Counter counter = entityManager.createQuery(
-                "SELECT a FROM Counters a"
-                        + "WHERE a.cassette_id = " + cassette_id, Counter.class).getSingleResult();
-    }
-
-    @Override
-    public int getNumOfNotes(int value) {
+    public int getCurrentCounter(int value) {
         logger.info("value = " + value);
          Counter counter = entityManager.createQuery("SELECT c FROM Counter c " +
                  "WHERE c.cassette_id = (SELECT id FROM Cassette i WHERE i.value = "+value+" )", Counter.class).getSingleResult();

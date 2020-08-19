@@ -1,11 +1,10 @@
 package com.stlesnik.core.service;
 
 import com.stlesnik.core.model.Cassette;
-import com.stlesnik.core.model.Counter;
 
 import java.util.List;
 
-public interface CoreService {
+public interface CassetteService {
     public void addCassette(Cassette cassette);
 
     public String updateCassette(Cassette cassette);
@@ -16,7 +15,4 @@ public interface CoreService {
 
     public List<Cassette> listCassette();
 
-    public int getNumOfNotes(int value);
-
-    public void withdrawCounters(int[][] notes);
 }

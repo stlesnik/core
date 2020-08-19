@@ -16,9 +16,7 @@ public interface CoreDao {
 
     public List<Cassette> listCassette();
 
-    public void changeAmountOnCounter(int cassette_id, int number);
-
-    public int getNumOfNotes(int value);
+    public int getCurrentCounter(int value);
 
     public void withdrawCounters(int[][] notes);
 }
