@@ -1,8 +1,9 @@
 package com.stlesnik.core.controller;
 
 import com.stlesnik.core.model.Cassette;
+import com.stlesnik.core.model.Withdraw;
 import com.stlesnik.core.service.CassetteService;
-import com.stlesnik.core.service.WithdrawService;
+import com.stlesnik.core.service.CashService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class CoreController {
     CassetteService cassetteService;
 
     @Autowired
-    WithdrawService withdrawService;
+    CashService cashService;
 
     @RequestMapping(value = "/cassettes", method = RequestMethod.GET)
     public List<Cassette> getCassetteList() {
@@ -76,8 +77,14 @@ public class CoreController {
     //localhost:8080/cash/out/5000
     @RequestMapping(value = "/cash/out/{amount}", method = RequestMethod.GET)
     public String withdrawMoney(@PathVariable int amount) {
-        return withdrawService.withdrawMoney(amount);
+        Withdraw withdraw = cashService.withdrawMoney(amount);
+        if(withdraw.getErrorMessage() != null){return withdraw.getErrorMessage();}
+        else{return withdraw.getWithdrawOutput();}
     }
 
-
+    //localhost:8080/cash/in/notes?notes=50,20,10,5,2,1
+    @RequestMapping(value = "/cash/in/notes", method = RequestMethod.PUT)
+    public String depositMoney(@RequestParam(value = "notes", required = true) int[] notes){
+        return cashService.depositMoney(notes);
+    }
 }

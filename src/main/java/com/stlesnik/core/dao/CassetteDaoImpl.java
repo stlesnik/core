@@ -11,12 +11,12 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class CoreDaoImpl implements CoreDao {
+public class CassetteDaoImpl implements CassetteDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    Logger logger = LoggerFactory.getLogger(CoreDaoImpl.class);
+    Logger logger = LoggerFactory.getLogger(CassetteDaoImpl.class);
 
 
     @Override
@@ -95,7 +95,7 @@ public class CoreDaoImpl implements CoreDao {
     }
 
     @Override
-    public void withdrawCounters(int[][] notes) {
+    public void withdrawMoney(int[][] notes) {
         for(int i = 0; i<6; i++){
             Counter counter = entityManager.createQuery("SELECT c " +
                     "FROM Counter c " +
@@ -104,6 +104,23 @@ public class CoreDaoImpl implements CoreDao {
                     "WHERE i.value = " + notes[i][0] +
                     " ) ", Counter.class).getSingleResult();
             counter.setNumber(counter.getNumber() - notes[i][1]);
+            entityManager.merge(counter);
+        }
+    }
+
+    @Override
+    public void depositMoney(int[] notes) {
+
+        int[] temp = {5000,2000,1000,500,200,100};
+
+        for(int i = 0; i<6; i++){
+            Counter counter = entityManager.createQuery("SELECT c " +
+                    "FROM Counter c " +
+                    "where c.cassette_id = (SELECT id " +
+                    "FROM Cassette i " +
+                    "WHERE i.value = " + temp[i] +
+                    " ) ", Counter.class).getSingleResult();
+            counter.setNumber(counter.getNumber() + notes[i]);
             entityManager.merge(counter);
         }
     }

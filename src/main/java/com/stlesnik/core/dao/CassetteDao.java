@@ -5,7 +5,7 @@ import com.stlesnik.core.model.Cassette;
 
 import java.util.List;
 
-public interface CoreDao {
+public interface CassetteDao {
     public void addCassette(Cassette cassette);
 
     public String updateCassette(Cassette cassette);
@@ -18,5 +18,7 @@ public interface CoreDao {
 
     public int getCurrentCounter(int value);
 
-    public void withdrawCounters(int[][] notes);
+    public void withdrawMoney(int[][] notes);
+
+    public void depositMoney(int[] notes);
 }

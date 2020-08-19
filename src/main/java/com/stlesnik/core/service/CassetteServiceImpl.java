@@ -1,6 +1,6 @@
 package com.stlesnik.core.service;
 
-import com.stlesnik.core.dao.CoreDao;
+import com.stlesnik.core.dao.CassetteDao;
 import com.stlesnik.core.model.Cassette;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,44 +15,44 @@ public class CassetteServiceImpl implements CassetteService{
     Logger logger = LoggerFactory.getLogger(CassetteServiceImpl.class);
 
     @Autowired
-    private CoreDao coreDao;
+    private CassetteDao cassetteDao;
 
     public CassetteServiceImpl(){
     }
 
-    public CassetteServiceImpl(CoreDao coreDao) {
-        this.coreDao = coreDao;
+    public CassetteServiceImpl(CassetteDao cassetteDao) {
+        this.cassetteDao = cassetteDao;
     }
 
 
     @Override
     @Transactional
     public void addCassette(Cassette cassette) {
-        coreDao.addCassette(cassette);
+        cassetteDao.addCassette(cassette);
     }
 
     @Override
     @Transactional
     public String updateCassette(Cassette cassette) {
-        return coreDao.updateCassette(cassette);
+        return cassetteDao.updateCassette(cassette);
     }
 
     @Override
     @Transactional
     public void removeCassette(int id) {
-        coreDao.removeCassette(id);
+        cassetteDao.removeCassette(id);
     }
 
     @Override
     @Transactional
     public Cassette getCassetteById(int id) {
-        return coreDao.getCassetteById(id);
+        return cassetteDao.getCassetteById(id);
     }
 
     @Override
     @Transactional
     public List<Cassette> listCassette() {
-        return coreDao.listCassette();
+        return cassetteDao.listCassette();
     }
 
 }
