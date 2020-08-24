@@ -1,38 +1,18 @@
 package com.stlesnik.core.model;
 
+import java.util.List;
+
 public class Withdraw {
-    private int[][] notes;
-
-    private String errorMessage;
-
-    private String withdrawOutput;
+    private List<Banknote> banknotes;
 
     public Withdraw(){
-        this.notes = null;
-        this.errorMessage = null;
-        this.withdrawOutput = null;}
+        this.banknotes = null;}
 
-    public int[][] getNotes() {
-        return notes;
+    public List<Banknote> getBanknotes() {
+        return banknotes;
     }
 
-    public void setNotes(int[][] notes) {
-        this.notes = notes;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-    public String getWithdrawOutput() {
-        return withdrawOutput;
-    }
-
-    public void setWithdrawOutput(String withdrawOutput) {
-        this.withdrawOutput = withdrawOutput;
+    public void setBanknotes(List<Banknote> banknotes) {
+        this.banknotes = banknotes;
     }
 }

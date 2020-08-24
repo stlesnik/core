@@ -1,5 +1,6 @@
 package com.stlesnik.core.dao;
 
+import com.stlesnik.core.model.Banknote;
 import com.stlesnik.core.model.Cassette;
 import com.stlesnik.core.model.Counter;
 import org.slf4j.Logger;
@@ -95,15 +96,15 @@ public class CassetteDaoImpl implements CassetteDao {
     }
 
     @Override
-    public void withdrawMoney(int[][] notes) {
+    public void withdrawMoney(List<Banknote> banknotes) {
         for(int i = 0; i<6; i++){
             Counter counter = entityManager.createQuery("SELECT c " +
                     "FROM Counter c " +
                     "where c.cassette_id = (SELECT id " +
                     "FROM Cassette i " +
-                    "WHERE i.value = " + notes[i][0] +
+                    "WHERE i.value = " + banknotes.get(i).getDenomination() +
                     " ) ", Counter.class).getSingleResult();
-            counter.setNumber(counter.getNumber() - notes[i][1]);
+            counter.setNumber(counter.getNumber() - banknotes.get(i).getAmount());
             entityManager.merge(counter);
         }
     }

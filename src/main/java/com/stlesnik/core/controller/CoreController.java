@@ -1,5 +1,6 @@
 package com.stlesnik.core.controller;
 
+import com.stlesnik.core.model.Banknote;
 import com.stlesnik.core.model.Cassette;
 import com.stlesnik.core.model.Withdraw;
 import com.stlesnik.core.service.CassetteService;
@@ -76,10 +77,9 @@ public class CoreController {
 
     //localhost:8080/cash/out/5000
     @RequestMapping(value = "/cash/out/{amount}", method = RequestMethod.GET)
-    public String withdrawMoney(@PathVariable int amount) {
+    public Withdraw withdrawMoney(@PathVariable int amount) throws Exception {
         Withdraw withdraw = cashService.withdrawMoney(amount);
-        if(withdraw.getErrorMessage() != null){return withdraw.getErrorMessage();}
-        else{return withdraw.getWithdrawOutput();}
+        return withdraw;
     }
 
     //localhost:8080/cash/in/notes?notes=50,20,10,5,2,1
