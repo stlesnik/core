@@ -3,6 +3,7 @@ package com.stlesnik.core.dao;
 
 import com.stlesnik.core.model.Banknote;
 import com.stlesnik.core.model.Cassette;
+import com.stlesnik.core.model.Counter;
 
 import java.util.List;
 
@@ -21,5 +22,5 @@ public interface CassetteDao {
 
     public void withdrawMoney(List<Banknote> banknotes);
 
-    public void depositMoney(int[] notes);
+    public void depositMoney(List<Banknote> banknotes);
 }

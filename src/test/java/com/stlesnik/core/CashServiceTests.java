@@ -2,7 +2,6 @@ package com.stlesnik.core;
 
 import com.stlesnik.core.dao.CassetteDao;
 import com.stlesnik.core.model.Banknote;
-import com.stlesnik.core.model.Withdraw;
 import com.stlesnik.core.service.CashServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;

@@ -1,9 +1,11 @@
 package com.stlesnik.core.service;
 
-import com.stlesnik.core.model.Withdraw;
+import com.stlesnik.core.model.BanknotesWrapper;
 
 public interface CashService {
-    public Withdraw withdrawMoney(int amount) throws Exception;
+    public BanknotesWrapper withdrawMoney(int amount) throws Exception;
 
-    public String depositMoney(int[] notes);
+    public BanknotesWrapper withdrawMoneyWithExchange(int amount) throws Exception;
+
+    public String depositMoney(BanknotesWrapper banknotesWrapper);
 }

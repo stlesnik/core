@@ -110,18 +110,16 @@ public class CassetteDaoImpl implements CassetteDao {
     }
 
     @Override
-    public void depositMoney(int[] notes) {
+    public void depositMoney(List<Banknote> banknotes) {
 
-        int[] temp = {5000,2000,1000,500,200,100};
-
-        for(int i = 0; i<6; i++){
+        for(int i = 0; i<banknotes.size(); i++){
             Counter counter = entityManager.createQuery("SELECT c " +
                     "FROM Counter c " +
                     "where c.cassette_id = (SELECT id " +
                     "FROM Cassette i " +
-                    "WHERE i.value = " + temp[i] +
+                    "WHERE i.value = " + banknotes.get(i).getDenomination() +
                     " ) ", Counter.class).getSingleResult();
-            counter.setNumber(counter.getNumber() + notes[i]);
+            counter.setNumber(counter.getNumber() + banknotes.get(i).getAmount());
             entityManager.merge(counter);
         }
     }
