@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -28,46 +27,21 @@ public class CoreController {
         return cassetteService.listCassette();
     }
 
-    @RequestMapping(value = "/cassettes/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/cassettes/cassette/{id}", method = RequestMethod.GET)
     public Cassette getCassetteById(@PathVariable int id) {
         logger.info("id = " + id);
         return cassetteService.getCassetteById(id);
     }
 
-    //http://localhost:8080/cassettes/1234?name=nnaammee&type=In&value=0
-    //http://localhost:8080/cassettes/1234?name=nnaammee&type=Recycling&value=5000
-    @RequestMapping(value = "/cassettes/{id}", method = RequestMethod.POST)
-    public String addCassette(@PathVariable int id,
-                              @RequestParam(value = "name", required = true) String name,
-                              @RequestParam(value = "type", required = true) Cassette.CassetteType type,
-                              @RequestParam(value = "value", required = false) Integer value) {
-        Cassette cassette = new Cassette();
-        cassette.setId(id);
-        cassette.setName(name);
-        cassette.setType(type);
-        if (cassette.getType().equals(Cassette.CassetteType.Recycling)) {
-            cassette.setValue(value);
-        } else {
-            cassette.setValue(0);
-        }
+    //If u need to create In or  RetractReject type, you should use 0 as value
+    @RequestMapping(value = "/cassettes/cassette", method = RequestMethod.POST)
+    public String addCassette(@RequestBody Cassette cassette) {
         cassetteService.addCassette(cassette);
         return "success";
     }
 
-    @RequestMapping(value = "/cassettes/{id}", method = RequestMethod.PUT)
-    public String updateCassette(@PathVariable int id,
-                                 @RequestParam(value = "name", required = true) String name,
-                                 @RequestParam(value = "type", required = true) Cassette.CassetteType type,
-                                 @RequestParam(value = "value", required = false) int value) {
-        Cassette cassette = new Cassette();
-        cassette.setId(id);
-        cassette.setName(name);
-        cassette.setType(type);
-        if (cassette.getType().equals(Cassette.CassetteType.Recycling)) {
-            cassette.setValue(value);
-        } else {
-            cassette.setValue(0);
-        }
+    @RequestMapping(value = "/cassettes/cassette", method = RequestMethod.PUT)
+    public String updateCassette(@RequestBody Cassette cassette) {
         return cassetteService.updateCassette(cassette);
     }
 

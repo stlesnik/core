@@ -1,9 +1,8 @@
 package com.stlesnik.core.service;
 
-import com.stlesnik.core.dao.CassetteDao;
+import com.stlesnik.core.dao.AtmDao;
 import com.stlesnik.core.model.Banknote;
 import com.stlesnik.core.model.BanknotesWrapper;
-import com.stlesnik.core.model.Counter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,13 +14,13 @@ import java.util.List;
 public class CashServiceImpl implements CashService {
 
     @Autowired
-    private CassetteDao cassetteDao;
+    private AtmDao atmDao;
 
     public CashServiceImpl(){
     }
 
-    public CashServiceImpl(CassetteDao cassetteDao) {
-        this.cassetteDao = cassetteDao;
+    public CashServiceImpl(AtmDao atmDao) {
+        this.atmDao = atmDao;
     }
 
     @Override
@@ -44,7 +43,7 @@ public class CashServiceImpl implements CashService {
                 b.setAmount(temp / note);
                 b.setCurrency("RUB");
 
-                int numOfNotes = cassetteDao.getCurrentCounter(b.getDenomination());
+                int numOfNotes = atmDao.getCurrentCounter(b.getDenomination());
                 if (numOfNotes >= b.getAmount()) {
                     temp = temp - b.getDenomination() * b.getAmount();
                 }
@@ -59,7 +58,7 @@ public class CashServiceImpl implements CashService {
                 throw new Exception("it is impossible to issue the amount");
             }
             else{
-                cassetteDao.withdrawMoney(banknotes);
+                atmDao.withdrawMoney(banknotes);
                 banknotesWrapper.setBanknotes(banknotes);
             }
         }
@@ -87,7 +86,7 @@ public class CashServiceImpl implements CashService {
                 b.setAmount(temp / note);
                 b.setCurrency("RUB");
 
-                int numOfNotes = cassetteDao.getCurrentCounter(b.getDenomination());
+                int numOfNotes = atmDao.getCurrentCounter(b.getDenomination());
                 if (numOfNotes >= b.getAmount()) {
                     temp = temp - b.getDenomination() * b.getAmount();
                 }
@@ -106,10 +105,10 @@ public class CashServiceImpl implements CashService {
             }
 
             if(temp!=0){
-                throw new Exception("it is impossible to issue the amount");
+                banknotesWrapper = this.withdrawMoney(amount);
             }
             else{
-                cassetteDao.withdrawMoney(banknotes);
+                atmDao.withdrawMoney(banknotes);
                 banknotesWrapper.setBanknotes(banknotes);
             }
         }
@@ -119,7 +118,7 @@ public class CashServiceImpl implements CashService {
     @Override
     @Transactional
     public String depositMoney(BanknotesWrapper banknotesWrapper) {
-        cassetteDao.depositMoney(banknotesWrapper.getBanknotes());
+        atmDao.depositMoney(banknotesWrapper.getBanknotes());
         return "Success";
     }
 }

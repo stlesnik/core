@@ -12,12 +12,12 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class CassetteDaoImpl implements CassetteDao {
+public class AtmDaoImpl implements AtmDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    Logger logger = LoggerFactory.getLogger(CassetteDaoImpl.class);
+    Logger logger = LoggerFactory.getLogger(AtmDaoImpl.class);
 
 
     @Override
@@ -50,7 +50,7 @@ public class CassetteDaoImpl implements CassetteDao {
     public String updateCassette(Cassette cassette) {
 
         List<Cassette> cassetteList = entityManager.createQuery(
-                "SELECT a FROM Cassettes a" + " WHERE a.id = " + cassette.getId(), Cassette.class).getResultList();
+                "SELECT a FROM Cassette a" + " WHERE a.id = " + cassette.getId(), Cassette.class).getResultList();
         if (cassetteList == null || cassetteList.isEmpty()) {
             return "there is nothing to update update";
         }

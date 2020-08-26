@@ -7,7 +7,7 @@ import com.stlesnik.core.model.Counter;
 
 import java.util.List;
 
-public interface CassetteDao {
+public interface AtmDao {
     public void addCassette(Cassette cassette);
 
     public String updateCassette(Cassette cassette);
